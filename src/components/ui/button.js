@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { cn } from "../../lib/utils";
 
+// eslint-disable-next-line react/display-name
 const Button = React.forwardRef(({
                                      className,
                                      variant = 'default',
