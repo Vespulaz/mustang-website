@@ -2,18 +2,49 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '@/context/authcontext';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+    const router = useRouter();
+    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Xử lý logic đăng nhập ở đây
-        console.log('Login data:', formData);
+        setError('');
+        setIsLoading(true);
+
+        try {
+            // Giả lập API call
+            // Trong thực tế, đây sẽ là call đến backend API của bạn
+            await new Promise(resolve => setTimeout(resolve, 1000)); // giả lập delay
+
+            // Kiểm tra credentials (demo)
+            if (formData.email && formData.password) {
+                // Login thành công
+                login({
+                    email: formData.email,
+                    name: 'User Name',
+                    // Thêm các thông tin user khác nếu cần
+                });
+
+                // Chuyển hướng về trang chủ
+                router.push('/');
+            } else {
+                setError('Invalid email or password');
+            }
+        } catch (err) {
+            setError('An error occurred during login');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -44,6 +75,12 @@ const LoginPage = () => {
                 <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
                     <h2 className="text-2xl font-bold mb-6">Welcome back</h2>
 
+                    {error && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                            {error}
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium mb-2">
@@ -55,6 +92,8 @@ const LoginPage = () => {
                                 placeholder="Enter your email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                required
+                                disabled={isLoading}
                             />
                         </div>
 
@@ -69,6 +108,8 @@ const LoginPage = () => {
                                     placeholder="Enter your password"
                                     value={formData.password}
                                     onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                    required
+                                    disabled={isLoading}
                                 />
                                 <button
                                     type="button"
@@ -86,19 +127,24 @@ const LoginPage = () => {
 
                         <div className="flex items-center justify-between">
                             <label className="flex items-center">
-                                <input type="checkbox" className="mr-2" />
+                                <input
+                                    type="checkbox"
+                                    className="mr-2"
+                                    disabled={isLoading}
+                                />
                                 <span className="text-sm">Remember me</span>
                             </label>
-                            <a href="#" className="text-sm text-[#FF4500] hover:underline">
+                            <Link href="/forgot-password" className="text-sm text-[#FF4500] hover:underline">
                                 Forgot password?
-                            </a>
+                            </Link>
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full bg-[#FF4500] text-white py-2 rounded-lg hover:bg-[#FF4500]/90"
+                            className="w-full bg-[#FF4500] text-white py-2 rounded-lg hover:bg-[#FF4500]/90 disabled:opacity-50"
+                            disabled={isLoading}
                         >
-                            Sign In
+                            {isLoading ? 'Signing in...' : 'Sign In'}
                         </button>
 
                         <p className="text-center text-sm text-gray-600">

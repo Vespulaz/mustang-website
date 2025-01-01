@@ -2,18 +2,53 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '@/context/authcontext';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
+    const router = useRouter();
+    const { register } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         username: '',
         password: ''
     });
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Register data:', formData);
+        setError('');
+        setIsLoading(true);
+
+        try {
+            // Validate form
+            if (!formData.email || !formData.username || !formData.password) {
+                throw new Error('Please fill in all fields');
+            }
+
+            if (formData.password.length < 6) {
+                throw new Error('Password must be at least 6 characters');
+            }
+
+            // Giả lập API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Đăng ký thành công
+            register({
+                email: formData.email,
+                name: formData.username,
+                // Thêm các thông tin user khác nếu cần
+            });
+
+            // Chuyển hướng về trang chủ
+            router.push('/');
+        } catch (err) {
+            setError(err.message || 'An error occurred during registration');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -46,6 +81,12 @@ const RegisterPage = () => {
                         Create account to send feedback, set your favorite restaurants, and so on!
                     </p>
 
+                    {error && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                            {error}
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium mb-2">
@@ -57,6 +98,8 @@ const RegisterPage = () => {
                                 placeholder="Enter your Email Address"
                                 value={formData.email}
                                 onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                required
+                                disabled={isLoading}
                             />
                         </div>
 
@@ -70,6 +113,8 @@ const RegisterPage = () => {
                                 placeholder="Enter your User name"
                                 value={formData.username}
                                 onChange={(e) => setFormData({...formData, username: e.target.value})}
+                                required
+                                disabled={isLoading}
                             />
                         </div>
 
@@ -84,6 +129,9 @@ const RegisterPage = () => {
                                     placeholder="Enter your Password"
                                     value={formData.password}
                                     onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                    required
+                                    disabled={isLoading}
+                                    minLength={6}
                                 />
                                 <button
                                     type="button"
@@ -101,9 +149,10 @@ const RegisterPage = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#FF4500] text-white py-2 rounded-lg hover:bg-[#FF4500]/90"
+                            className="w-full bg-[#FF4500] text-white py-2 rounded-lg hover:bg-[#FF4500]/90 disabled:opacity-50"
+                            disabled={isLoading}
                         >
-                            Register
+                            {isLoading ? 'Registering...' : 'Register'}
                         </button>
 
                         <p className="text-center text-sm text-gray-600">
