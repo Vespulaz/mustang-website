@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import axios from 'axios';
 import Button from './components/ui/button';
 import Input from './components/ui/input';
 import Label from './components/ui/label';
@@ -7,6 +8,39 @@ import { Eye } from 'lucide-react';
 
 function App() {
     const [isRegister, setIsRegister] = useState(false);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3001/register', {
+                username,
+                email,
+                password
+            });
+            setMessage(response.data.message);
+        } catch (error) {
+            setMessage(error.response.data.message);
+        }
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3001/login', {
+                username,
+                password
+            });
+            setMessage('Login successful');
+            // Lưu token vào localStorage hoặc state để sử dụng sau này
+            localStorage.setItem('token', response.data.token);
+        } catch (error) {
+            setMessage(error.response.data.message);
+        }
+    };
 
     return (
         <div className="flex min-h-screen">
@@ -52,7 +86,7 @@ function App() {
                             )}
                         </div>
 
-                        <form className="space-y-4">
+                        <form className="space-y-4" onSubmit={isRegister ? handleRegister : handleLogin}>
                             {isRegister && (
                                 <div className="space-y-2">
                                     <Label htmlFor="email">Email Address</Label>
@@ -60,6 +94,8 @@ function App() {
                                         id="email"
                                         placeholder="Enter your Email Address"
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
                             )}
@@ -69,6 +105,8 @@ function App() {
                                 <Input
                                     id="username"
                                     placeholder="Enter your username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
 
@@ -79,6 +117,8 @@ function App() {
                                         id="password"
                                         type="password"
                                         placeholder="Enter your password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <button
                                         type="button"
@@ -94,10 +134,11 @@ function App() {
                                 <Label htmlFor="terms">Remember me</Label>
                             </div>
 
-                            <Button className="w-full">
+                            <Button className="w-full" type="submit">
                                 {isRegister ? 'Create Account' : 'Sign In'}
                             </Button>
                         </form>
+                        {message && <p className="text-red-500">{message}</p>}
                     </div>
                 </div>
             </div>
