@@ -32,14 +32,11 @@ const RegisterPage = () => {
                 throw new Error('Password must be at least 6 characters');
             }
 
-            // Giả lập API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
             // Đăng ký thành công
-            register({
+            await register({
                 email: formData.email,
                 name: formData.username,
-                // Thêm các thông tin user khác nếu cần
+                password: formData.password
             });
 
             // Chuyển hướng về trang chủ

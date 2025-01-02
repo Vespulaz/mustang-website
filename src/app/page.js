@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation'; // Sử dụng next/navigation thay vì next/router
 import Header from '@/components/header';
 import Search from '@/components/search';
 import RestaurantCard from '@/components/restaurantcard';
@@ -7,7 +8,8 @@ import { useAuth } from '@/context/authcontext';
 import Footer from '@/components/footer';
 
 const HomePage = () => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
+    const router = useRouter();
 
     const restaurants = [
         {
@@ -25,6 +27,19 @@ const HomePage = () => {
             image: 'https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwgaokscvaaj40@resize_ss576x330'
         },
     ];
+
+    const handleLoginClick = () => {
+        router.push('/login');
+    };
+
+    const handleAccountClick = () => {
+        router.push('/account');
+    };
+
+    const handleLogoutClick = () => {
+        logout();
+        router.push('/');
+    };
 
     return (
         <div className="min-h-screen">
