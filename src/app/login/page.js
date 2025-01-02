@@ -52,14 +52,14 @@ const LoginPage = () => {
             {/* Left side - Image */}
             <div className="hidden lg:block lg:w-1/2 relative">
                 <img
-                    src="/images/login-bg.jpg"
+                    src="https://static.vinwonders.com/production/Vietnamese-street-food-1.jpg"
                     alt="Login background"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40" />
                 <div className="absolute bottom-10 left-10 text-white">
                     <h2 className="text-3xl font-bold">MUSTÄNG</h2>
-                    <p className="mt-2">Discover the best street food in Ho Chi Minh City</p>
+                    <p className="mt-2">Delicious food, delicious me</p>
                 </div>
             </div>
 

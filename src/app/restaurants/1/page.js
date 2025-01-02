@@ -24,15 +24,16 @@ const Page = () => {
                 {/* Restaurant Info Section */}
                 <div className="flex gap-8 mb-8">
                     <div className="w-1/3">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/restaurant-image.jpg"
-                            alt="Bánh Tráng Trộn Cô Tiên"
+                            src="https://down-vn.img.susercontent.com/vn-11134513-7ras8-m4g10fdgypb483@resize_ss576x330"
+                            alt="KOI Thé - Vincom Center"
                             className="w-full h-64 object-cover rounded-lg"
                         />
                     </div>
 
                     <div className="w-2/3">
-                        <h2 className="text-2xl font-bold mb-4">Bánh Tráng Trộn Cô Tiên</h2>
+                        <h2 className="text-2xl font-bold mb-4">KOI Thé - Vincom Center</h2>
 
                         <div className="grid grid-cols-5 gap-4 mb-6">
                             <div className="text-center">
@@ -60,7 +61,7 @@ const Page = () => {
                         <div className="space-y-2 text-gray-600">
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-5 h-5" />
-                                <span>123 Standford Street, Ward 8, Oxford Districts</span>
+                                <span>Tầng Hầm 3,  B3 - 08 - 09 Vincom Center, 72 Lê Thánh Tôn, P. Bến Nghé,  Quận 1, TP. HCM</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Phone className="w-5 h-5" />
@@ -68,7 +69,7 @@ const Page = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Clock className="w-5 h-5" />
-                                <span>08:00 - 22:00</span>
+                                <span>09:30 - 22:00</span>
                             </div>
                         </div>
                     </div>
@@ -84,7 +85,7 @@ const Page = () => {
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                                         <div>
-                                            <div className="font-semibold">User name</div>
+                                            <div className="font-semibold">Username {index+1}</div>
                                             <div className="flex text-[#FF8C00]">
                                                 {[...Array(5)].map((_, i) => (
                                                     <Star key={i} className="w-4 h-4 fill-current" />
@@ -127,7 +128,7 @@ const Page = () => {
                         {[...Array(8)].map((_, index) => (
                             <div key={index} className="border rounded-lg p-2 relative">
                                 <img
-                                    src="/menu-item.jpg"
+                                    src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwexyv938bfd98"
                                     alt="Menu item"
                                     className="w-full h-40 object-cover rounded"
                                 />
@@ -151,7 +152,7 @@ const Page = () => {
                         {[...Array(6)].map((_, index) => (
                             <div key={index} className="rounded-lg overflow-hidden">
                                 <img
-                                    src="/venue-image.jpg"
+                                    src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwexyvc4zmxlef"
                                     alt="Venue"
                                     className="w-full h-48 object-cover"
                                 />

@@ -25,14 +25,14 @@ const FOOD_DATA = [
         title: 'Bánh Tráng Trộn & Cơ Ri Gà',
         address: 'District 1, Ho Chi Minh City',
         price: '35000',
-        image: '/images/banh-trang-tron.jpg'
+        image: 'https://down-vn.img.susercontent.com/vn-11134513-7ras8-m4g10fdgypb483@resize_ss576x330'
     },
     {
         id: 2,
         title: 'Bún Chả Hà Nội',
         address: 'District 3, Ho Chi Minh City',
         price: '45000',
-        image: '/images/bun-cha.jpg'
+        image: 'https://down-vn.img.susercontent.com/vn-11134513-7ras8-m4g10fdgypb483@resize_ss576x330'
     }
 ];
 
