@@ -6,18 +6,6 @@ import Footer from '@/components/footer';
 const Page = () => {
     return (
         <div className="min-h-screen bg-white">
-            {/*/!* Header *!/*/}
-            {/*<header className="bg-[#FFF7E6] py-3 px-4">*/}
-            {/*    <div className="max-w-7xl mx-auto flex justify-between items-center">*/}
-            {/*        <h1 className="text-[#FF8C00] font-bold text-2xl">MUSTANG</h1>*/}
-            {/*        <nav className="flex gap-6">*/}
-            {/*            <a href="#" className="text-[#B8860B]">Add review</a>*/}
-            {/*            <a href="#" className="text-[#B8860B]">Favorites</a>*/}
-            {/*            <a href="#" className="text-[#B8860B]">Account</a>*/}
-            {/*            <a href="#" className="text-[#B8860B]">Sign out</a>*/}
-            {/*        </nav>*/}
-            {/*    </div>*/}
-            {/*</header>*/}
             <Header />
 
             <main className="max-w-7xl mx-auto px-4 py-6">
