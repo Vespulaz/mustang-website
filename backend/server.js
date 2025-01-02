@@ -15,6 +15,8 @@ mongoose.connect('mongodb://localhost:27017/foodmap', { useNewUrlParser: true, u
 app.use(express.json());
 app.use(cors());
 
+
+
 // Định nghĩa mô hình người dùng
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
